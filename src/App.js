@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import{
    MenuItem,
    FormControl,
@@ -6,7 +6,7 @@ import{
    Card,
    CardContent, 
 } from "@material-ui/core";
-import InfoBox from './InfoBox';
+import InfoBox from "./InfoBox";
 import Map from "./Map/Map";
 import Table from "./Table/Table";
 import { sortData } from "./util";
@@ -20,9 +20,9 @@ function App() {
   const [ country, setCountry ] = useState('worldwide');
   const [ countryInfo, setCountryInfo ] = useState({});
   const [ tableData, setTableData] = useState([]);
-  const[ mapCenter, setMapCenter ] = useState({ lat: 34.80746, lng: -40.4796});
+  const[ mapCenter, setMapCenter ] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
-  const[mapCOuntries, setMapCountries] = useState([]);
+  const[mapCountries, setMapCountries] = useState([]);
 
   const [casesType, setCasesType] = useState("cases");
 
@@ -69,11 +69,10 @@ function App() {
         .then((data) => { 
             setCountry(countryCode);
             setCountryInfo(data);
-            setMapCenter([data.countryInfo.lat, data.countryInfo.long])
+            setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
             setMapZoom(4);
         });
       };
-      console.log('country info>>>' , countryInfo);
 
   return (
     <div className="app">
@@ -99,6 +98,7 @@ function App() {
         
         <Map 
          countries= {mapCountries}
+         casesType={casesType}
          center ={mapCenter}
          zoom ={mapZoom}
          />
@@ -108,7 +108,7 @@ function App() {
         <CardContent>
           <h3> live cases</h3>
           <Table countries = { tableData } />
-          <LineGraph />
+          <LineGraph casesType={casesType}/>
         </CardContent>
       </Card>
     </div>
