@@ -7,8 +7,12 @@ import{
    CardContent, 
 } from "@material-ui/core";
 import InfoBox from './InfoBox';
-import Map from "./Map";
-import Table from "./Table";
+import Map from "./Map/Map";
+import Table from "./Table/Table";
+import { sortData } from "./util";
+import numeral from "numeral";
+import LineGraph from "./LineGraph";
+import "leaflet/dist/leaflet.css";
 import "./App.css"
 
 function App() {
@@ -16,6 +20,19 @@ function App() {
   const [ country, setCountry ] = useState('worldwide');
   const [ countryInfo, setCountryInfo ] = useState({});
   const [ tableData, setTableData] = useState([]);
+  const[ mapCenter, setMapCenter ] = useState({ lat: 34.80746, lng: -40.4796});
+  const [mapZoom, setMapZoom] = useState(3);
+  const[mapCOuntries, setMapCountries] = useState([]);
+
+  const [casesType, setCasesType] = useState("cases");
+
+  useEffect(() => {
+    fetch("https://disease.sh/v3/covid-19/all")
+      .then((response) => response.json())
+      .then((data) => {
+        setCountryInfo(data);
+      });
+  }, []);
 
   useEffect(() =>{
           const getCountriesData = async () => {
@@ -28,16 +45,19 @@ function App() {
                   value: country.countryInfo.iso2,
                 }
               ));
-
-              setTableData(data);
+              let sortedData = sortData(data);
               setCountries(countries);
+              setMapCountries(data);
+              setTableData(sortedData);
             });
           }
           getCountriesData();
   }, []);
+   console.log(casesType);
 
    const onCountryChange = async(event) => {
       const countryCode = event.target.value;
+
       setCountry(countryCode);          
 
       const url = countryCode === "worldwide" 
@@ -47,8 +67,10 @@ function App() {
         await fetch(url)
         .then((response) => response.json())
         .then((data) => { 
-            setCountry( countryCode );
+            setCountry(countryCode);
             setCountryInfo(data);
+            setMapCenter([data.countryInfo.lat, data.countryInfo.long])
+            setMapZoom(4);
         });
       };
       console.log('country info>>>' , countryInfo);
@@ -70,22 +92,26 @@ function App() {
             </FormControl>          
         </div>       
         <div className="app__stats">
-          <InfoBox title="coronavirus cases" cases={countryInfo.todayCases} total={countryInfo.cases} />
-
+          <InfoBox title="coronavirus cases" isRed cases={countryInfo.todayCases} total={countryInfo.cases} />
           <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered}/>
-
           <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
         </div>
-        <Map />
+        
+        <Map 
+         countries= {mapCountries}
+         center ={mapCenter}
+         zoom ={mapZoom}
+         />
+
       </div>     
       <Card className="app__right">
         <CardContent>
-          <h3> live  casees</h3>
-          <Table countries = {tableData} />
+          <h3> live cases</h3>
+          <Table countries = { tableData } />
+          <LineGraph />
         </CardContent>
       </Card>
     </div>
-  
   );  
 }
 

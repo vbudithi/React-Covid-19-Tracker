@@ -1,0 +1,17 @@
+.table {
+    margin-top: 20px;
+    overflow: scroll;
+    height: 400px;
+    color: #6a5d5d;
+}
+.table tr {
+    display:flex;
+    justify-content: space-between;
+}
+.table tr:nth-of-type(odd){
+    background-color: #f0f5f5;
+}
+
+.table tr:nth-of-type(even){
+    background-color:  #d1e0e0;
+}

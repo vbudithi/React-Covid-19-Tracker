@@ -13,13 +13,13 @@ function InfoBox({ title, cases, total }) {
                    {total} Total
                </h2>
 
-               <h4 className="infoBox__cases"> + {cases} cases today </h4>
+               <h4 className="infoBox__cases"> + {cases} today </h4>
              
            </CardContent>
         </Card>
-    )
+    );
 }
 
-export default InfoBox
+export default InfoBox;
 
 

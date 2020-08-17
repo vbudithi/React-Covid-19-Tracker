@@ -19,6 +19,9 @@ body {
    justify-content:space-between;
 }
 
+.table td{
+   padding:0.5rem;
+}
 .app__left{
   flex:0.9;
 }
