@@ -1,24 +1,22 @@
 import React from 'react';
 import numeral from "numeral";
-import { Circle, Popup } from 'react-leaflet';
+import { Circle, Popup, Marker } from 'react-leaflet';
+import StarRateIcon from '@material-ui/icons/StarRate';
+import IconButton from '@material-ui/core/IconButton';
+import './util.css'
+
 
 const casesTypeColors = {
     cases: {
-      hex: "#CC1034",
-      rgb: "rgb(204, 16, 52)",
-      half_op: "rgba(204, 16, 52, 0.5)",
+      hex: "#F08080",
       multiplier: 800,
     },
     recovered: {
-      hex: "#7dd71d",
-      rgb: "rgb(125, 215, 29)",
-      half_op: "rgba(125, 215, 29, 0.5)",
+      hex: "#90EE90",
       multiplier: 1200,
     },
     deaths: {
       hex: "#fb4443",
-      rgb: "rgb(251, 68, 67)",
-      half_op: "rgba(251, 68, 67, 0.5)",
       multiplier: 2000,
     },
   };
@@ -48,12 +46,21 @@ export const showDataOnMap = (data, casesType = "cases") =>
       }
       >
         <Popup>
+          
             <div className="info-container">
+                <br />
                 <div className="info-flag" style={{ backgroundImage : `url(${country.countryInfo.flag})` }} />
-                <div className="info-country"> <h2> {country.country} </h2>  </div>
-                <div className="info-name"> No of Cases: {numeral(country.cases).format("0,0")} </div>
-                <div className="info-name">Recovered: {numeral(country.recovered).format("0,0")}</div>
-                <div className="info-name">Deaths: {numeral(country.deaths).format("0,0")}</div>
+                <div className="info-country"> <h1> {country.country} </h1>  </div>
+                <br />
+                <IconButton >
+                  <StarRateIcon  className= "svg_icons"/>
+                </IconButton>
+           
+                <div className="info-name"> <h3 className="info-case1">No of Cases:</h3>
+                     <i class="fa fa-universal" />
+                   {numeral(country.cases).format("0,0")} </div>
+                <div className="info-name"><h3 className="info-case2">Recovered: </h3> {numeral(country.recovered).format("0,0")}</div>
+                <div className="info-name"><h3 className="info-case3">Deaths: </h3> {numeral(country.deaths).format("0,0")}</div>
             </div>
         </Popup>
       </Circle>

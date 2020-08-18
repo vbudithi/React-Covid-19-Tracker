@@ -1,9 +1,14 @@
 import React from 'react'
 import { Card, CardContent, Typography } from "@material-ui/core";
+import './InfoBox.css';
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 function InfoBox({ title, cases, total }) {
+    Aos.init({duration:200});  
     return (
-        <Card className="infoBox">
+        <div data-aos="fade-right" data-aos-once="true" className="card">
+         <Card className="infoBox">
            <CardContent>
                <Typography className="infoBox__title" color= "textSecondary">
                     {title}
@@ -17,6 +22,7 @@ function InfoBox({ title, cases, total }) {
              
            </CardContent>
         </Card>
+    </div>
     );
 }
 

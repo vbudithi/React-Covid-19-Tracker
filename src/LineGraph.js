@@ -45,7 +45,6 @@ const options={
         ],
     },
 };
-
      const buildChartData = (data, casesType= 'cases') => {
         const chartData = [];
         let lastDataPoint;
@@ -78,10 +77,9 @@ const options={
       fetchData();
      }, [casesType]);
 
-
     return (
         <div>
-            <h1>I am a graph</h1> 
+            <h1>Worldwide Cases</h1> 
             {data.length > 0 && (    
                <Line 
                

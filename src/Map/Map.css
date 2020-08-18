@@ -1,5 +1,5 @@
 .map {
-  height: 500px;
+  height: 450px;
   background-color: #DCDCDC;
   padding: 1rem;
   border-radius: 20px;
@@ -9,7 +9,7 @@
 
 .map .leaflet-container {
   height: 100%;
-  border-radius: 12px;
+  border-radius: 15px;
 }
 
 .info-flag img {
@@ -17,13 +17,26 @@
   border-radius: 50px;
 }
 
+.info-container{
+  background-color: #ffe6e6;
+}
+
 .info-country{
   background:#D3D3D3;
-  padding-top: 5px;
-  padding-bottom:5px;
   text-align: center;
-  color: #7B68EE;
+  color: #CD5C5C;
+}
 
+.info-case1{
+  color:#6A5ACD;
+
+}
+.info-case2{
+  color:#006600;
+}
+
+.info-case3{
+  color: #992600;
 }
 .info-name {
   font-size: 16px;
@@ -33,15 +46,11 @@
   text-align: center;
 }
 
-.info-container {
-  width: 150px;
-}
-
 .info-flag {
-  height: 80px;
+  height: 76px;
   width: 100%;
   background-size: cover;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .info-confirmed,

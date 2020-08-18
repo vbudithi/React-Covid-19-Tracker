@@ -26,10 +26,26 @@ body {
   flex:0.9;
 }
 
+.app__center{
+      text-align: center;
+}
+
 .app__stats{
   display:flex;
   justify-content: space-between;
 }
+
+.app__dropdown{
+   color:black;
+   transition: all 1s;
+   background: #cce6ff;
+}
+
+.app__dropdown:hover{
+   background-color: #66b3ff;
+   color: white;
+}
+
 
 @media (max-width: 990px) {
    .app {
